@@ -1,8 +1,10 @@
 # Security headers for every page. Cloudflare Pages reads this file.
-# frame-ancestors lets SEED (a Zite app) show this site in a frame. Keep it, and don't add X-Frame-Options.
+# frame-ancestors lets SEED show this site in a frame: the published app (c2lanh4vgm.zite.so), its editor
+# preview (zite-editor-c2lanh4vgm.zite.so) and the Zite editor around it (app.zite.com). If SEED moves to
+# another address, add it here. Keep this rule, and don't add X-Frame-Options.
 # The preview site's noindex header is set in Cloudflare, not here, so a merge can't carry it to the live site.
 /*
-  Content-Security-Policy: frame-ancestors 'self' https://*.zite.so https://*.zite.com
+  Content-Security-Policy: frame-ancestors 'self' https://c2lanh4vgm.zite.so https://zite-editor-c2lanh4vgm.zite.so https://app.zite.com
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
