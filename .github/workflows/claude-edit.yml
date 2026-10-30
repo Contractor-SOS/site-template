@@ -57,7 +57,8 @@ jobs:
       screenshots: ${{ inputs.screenshots }}
       attachments: ${{ inputs.attachments }}
       history: ${{ inputs.history }}
-      callback_url: ${{ inputs.callback_url }}
+      # callback_url is deliberately not passed on: GitHub prints these values in
+      # the public log. The shared workflow reads it from this run's own inputs.
       max_turns: ${{ fromJSON(inputs.max_turns) }}
       model: ${{ inputs.model }}
     secrets:
