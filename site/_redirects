@@ -1,0 +1,3 @@
+# Old URLs that must keep working. One rule per line: from  to  status
+# Fill this in from the old site's capture before going live, for example:
+# /old-page   /new-page   301

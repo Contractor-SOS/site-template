@@ -1,0 +1,65 @@
+# Starts a Claude edit of this site's preview branch. SEED starts this
+# workflow; you can also start it from the Actions tab with "Run workflow".
+# The steps live in the shared site-tools repo, so every site runs the same way.
+name: Claude edit
+run-name: Claude edit ${{ inputs.request_id }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      request_id:
+        description: Request ID (SEED fills this in; any label for a manual run)
+        required: true
+        default: manual
+      request:
+        description: What to change
+        required: true
+      screenshots:
+        description: Reference image URLs (optional)
+        required: false
+        default: ""
+      attachments:
+        description: URLs of files to add to the site (optional)
+        required: false
+        default: ""
+      history:
+        description: Earlier requests and replies (optional)
+        required: false
+        default: ""
+      callback_url:
+        description: SEED result webhook (optional)
+        required: false
+        default: ""
+      max_turns:
+        description: Most steps Claude may take
+        required: false
+        type: number
+        default: 30
+      model:
+        description: Claude model (blank uses the default)
+        required: false
+        default: ""
+
+# One edit at a time per site. A run started while another is going waits for it.
+concurrency:
+  group: claude-edit
+  cancel-in-progress: false
+
+jobs:
+  edit:
+    permissions:
+      contents: write
+      id-token: write
+    uses: Contractor-SOS/site-tools/.github/workflows/claude-edit.yml@main
+    with:
+      request_id: ${{ inputs.request_id }}
+      request: ${{ inputs.request }}
+      screenshots: ${{ inputs.screenshots }}
+      attachments: ${{ inputs.attachments }}
+      history: ${{ inputs.history }}
+      callback_url: ${{ inputs.callback_url }}
+      max_turns: ${{ inputs.max_turns }}
+      model: ${{ inputs.model }}
+    secrets:
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+      SEED_WEBHOOK_SECRET: ${{ secrets.SEED_WEBHOOK_SECRET }}
