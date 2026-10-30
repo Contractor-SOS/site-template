@@ -58,7 +58,7 @@ jobs:
       attachments: ${{ inputs.attachments }}
       history: ${{ inputs.history }}
       callback_url: ${{ inputs.callback_url }}
-      max_turns: ${{ inputs.max_turns }}
+      max_turns: ${{ fromJSON(inputs.max_turns) }}
       model: ${{ inputs.model }}
     secrets:
       CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
