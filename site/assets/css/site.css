@@ -157,6 +157,8 @@ strong { color: var(--color-heading); }
 }
 .brand:hover { color: var(--color-header-text); }
 .brand img { width: 2.6rem; height: auto; flex: none; }
+/* Let a long company name wrap to two lines so the Menu button stays on the same row */
+.brand span { max-width: 10.5em; }
 .nav-toggle {
   display: inline-flex; align-items: center; gap: 0.5rem;
   min-height: 2.75rem; padding: 0.5rem 0.9rem;
@@ -184,18 +186,22 @@ strong { color: var(--color-heading); }
 .site-nav .nav-cta { margin-top: 1rem; }
 .site-nav .nav-cta a { border: 0; }
 .header-inner { flex-wrap: wrap; }
-@media (min-width: 64rem) {
+/* The call-to-action button in the menu keeps button colors, not menu-link colors */
+.site-nav .nav-cta a, .site-nav .nav-cta a[aria-current="page"] { color: var(--color-button-text); }
+.site-nav .nav-cta a:hover { color: var(--color-button-hover-text); }
+/* Desktop menu from 72rem (1152px); narrower screens use the Menu button */
+@media (min-width: 72rem) {
   .header-inner { flex-wrap: nowrap; }
   .nav-toggle { display: none; }
   .site-nav, .site-nav.is-open { display: block; width: auto; }
-  .site-nav ul { display: flex; align-items: center; gap: 1.6rem; padding: 0; }
-  .site-nav a { padding: 0.4rem 0; border: 0; font-size: 0.82rem; }
-  .site-nav .nav-cta { margin-top: 0; margin-left: 0.5rem; }
+  .site-nav ul { display: flex; align-items: center; gap: 1.35rem; padding: 0; }
+  .site-nav a { padding: 0.4rem 0; border: 0; font-size: 0.82rem; white-space: nowrap; }
+  .site-nav .nav-cta { margin-top: 0; margin-left: 0.4rem; }
   .site-nav .nav-cta a { padding: 0.55rem 1rem; }
 }
 .js .site-nav { display: none; }
 .js .site-nav.is-open { display: block; }
-@media (min-width: 64rem) { .js .site-nav { display: block; } }
+@media (min-width: 72rem) { .js .site-nav { display: block; } }
 .no-js .nav-toggle { display: none; }
 .no-js .site-nav { display: block; }
 
